@@ -1,0 +1,83 @@
+<%= form_for @classmate, :html => { :class => "form-horizontal classmate" } do |f| %>
+
+  <% if @classmate.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@classmate.errors.count, "error") %> prohibited this classmate from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @classmate.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :first_name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :first_name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:first_name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :last_name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:last_name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :married_name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :married_name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:married_name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :spouse, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :spouse, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:spouse) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :paid, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :paid, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:paid) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :attending, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :attending, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:attending) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :status_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :status_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:status_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :user_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :user_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:user_id) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                classmates_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
