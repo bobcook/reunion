@@ -5,7 +5,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:first_name) %></th>
       <th><%= model_class.human_attribute_name(:last_name) %></th>
       <th><%= model_class.human_attribute_name(:married_name) %></th>
@@ -13,15 +12,11 @@
       <th><%= model_class.human_attribute_name(:paid) %></th>
       <th><%= model_class.human_attribute_name(:attending) %></th>
       <th><%= model_class.human_attribute_name(:status_id) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @classmates.each do |classmate| %>
       <tr>
-        <td><%= link_to classmate.id, classmate_path(classmate) %></td>
         <td><%= classmate.first_name %></td>
         <td><%= classmate.last_name %></td>
         <td><%= classmate.married_name %></td>
@@ -29,8 +24,6 @@
         <td><%= classmate.paid %></td>
         <td><%= classmate.attending %></td>
         <td><%= classmate.status_id %></td>
-        <td><%= classmate.user_id %></td>
-        <td><%=l classmate.created_at %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       classmate_path(classmate), :class => 'btn btn-default btn-xs' %>

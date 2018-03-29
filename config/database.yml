@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: reunion_production
-  username: reunion
-  password: <%= ENV['REUNION_DATABASE_PASSWORD'] %>
+  username:
+  password:
