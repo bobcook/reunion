@@ -12,6 +12,12 @@
   <dd><%= @classmate.married_name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:spouse) %>:</strong></dt>
   <dd><%= @classmate.spouse %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
+  <dd><%= @classmate.addresses.inspect %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:phone_number) %>:</strong></dt>
+  <dd><%= @classmate.phones.inspect %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @classmate.emails.inspect %></dd>
   <dt><strong><%= model_class.human_attribute_name(:paid) %>:</strong></dt>
   <dd><%= @classmate.paid %></dd>
   <dt><strong><%= model_class.human_attribute_name(:attending) %>:</strong></dt>

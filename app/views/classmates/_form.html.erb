@@ -1,5 +1,4 @@
-<%= form_for @classmate, :html => { :class => "form-horizontal classmate" } do |f| %>
-
+<%= form_for(setup_classmate(@classmate), :html => { :class => "form-horizontal classmate" }) do |f| %>
   <% if @classmate.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
@@ -14,57 +13,131 @@
       </div>
     </div>
   <% end %>
-
-  <div class="form-group">
-    <%= f.label :first_name, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :first_name, :class => 'form-control' %>
+  Name:
+  <div class="row">
+    <div class="col-6">
+    <div class="form-group">
+      <%= f.label :first_name, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-3">
+        <%= f.text_field :first_name, :class => 'form-control' %>
+      </div>
+      <%=f.error_span(:first_name) %>
     </div>
-    <%=f.error_span(:first_name) %>
+    <div class="form-group">
+      <%= f.label :last_name, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-3">
+        <%= f.text_field :last_name, :class => 'form-control' %>
+      </div>
+      <%=f.error_span(:last_name) %>
+    </div>
+  </div>
+    <div class="form-group">
+      <%= f.label :married_name, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-3">
+        <%= f.text_field :married_name, :class => 'form-control' %>
+      </div>
+      <%=f.error_span(:married_name) %>
+    </div>
+    <div class="form-group">
+      <%= f.label :spouse, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-3">
+        <%= f.text_field :spouse, :class => 'form-control' %>
+      </div>
+      <%=f.error_span(:spouse) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <%= f.label :paid, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-6">
+          <%= f.check_box_tag :paid, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:paid) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :attending, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-7">
+          <%= f.check_box_tag :attending, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:attending) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :status_id, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-7">
+          <%= f.select(:status_id, [1,2,3,4], {}, :class => "col-md-1") %>
+        </div>
+        <%=f.error_span(:status_id) %>
+      </div>
+    </div>
+  </div>
+  Address:
+  <%= f.fields_for :addresses do |ff| %>
+  <div class="span6 form-group">
+    <%= ff.label :street1, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= ff.text_field :street1, :class => 'form-control' %>
+    </div>
   </div>
   <div class="form-group">
-    <%= f.label :last_name, :class => 'control-label col-lg-2' %>
+    <%= ff.label :street2, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :last_name, :class => 'form-control' %>
+      <%= ff.text_field :stree2, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:last_name) %>
   </div>
   <div class="form-group">
-    <%= f.label :married_name, :class => 'control-label col-lg-2' %>
+    <%= ff.label :city, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :married_name, :class => 'form-control' %>
+      <%= ff.text_field :city, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:married_name) %>
   </div>
   <div class="form-group">
-    <%= f.label :spouse, :class => 'control-label col-lg-2' %>
+    <%= ff.label :state, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :spouse, :class => 'form-control' %>
+      <%= ff.text_field :state, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:spouse) %>
   </div>
   <div class="form-group">
-    <%= f.label :paid, :class => 'control-label col-lg-2' %>
+    <%= ff.label :zip, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.check_box_tag :paid, :class => 'form-control' %>
+      <%= ff.text_field :zip, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:paid) %>
   </div>
   <div class="form-group">
-    <%= f.label :attending, :class => 'control-label col-lg-2' %>
+    <%= ff.label :country, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.check_box_tag :attending, :class => 'form-control' %>
+      <%= ff.text_field :country, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:attending) %>
+  </div>
+  <% end %>
+  <%= f.fields_for :phones do |fp| %>
+  <div class="form-group">
+    <%= fp.label :type, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= fp.text_field :type, :class => 'form-control' %>
+    </div>
   </div>
   <div class="form-group">
-    <%= f.label :status_id, :class => 'control-label col-lg-2' %>
+    <%= fp.label :phone_number, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.select(:status_id, [1,2,3,4], {}, :class => "col-md-1") %>
+      <%= fp.text_field :number, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:status_id) %>
   </div>
-
+  <% end %>
+  <%= f.fields_for :emails do |fe| %>
+  <div class="form-group">
+    <%= fe.label :type, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= fe.text_field :type, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= fe.label :email, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= fe.text_field :email, :class => 'form-control' %>
+    </div>
+  </div>
+  <% end %>
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit nil, :class => 'btn btn-primary' %>
