@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "phones/edit", type: :view do
   before(:each) do
     @phone = assign(:phone, Phone.create!(
-      :type => "",
+      :label => "",
       :number => "MyString",
       :classmate => ""
     ))

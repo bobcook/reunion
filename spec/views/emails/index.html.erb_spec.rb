@@ -4,12 +4,12 @@ RSpec.describe "emails/index", type: :view do
   before(:each) do
     assign(:emails, [
       Email.create!(
-        :type => "Type",
+        :label => "Type",
         :email => "Email",
         :classmate => ""
       ),
       Email.create!(
-        :type => "Type",
+        :label => "Type",
         :email => "Email",
         :classmate => ""
       )

@@ -4,7 +4,8 @@ class ClassmatesController < ApplicationController
   # GET /classmates
   # GET /classmates.json
   def index
-    @classmates = Classmate.all
+    @q = Classmate.ransack(params[:q])
+    @classmates = @q.result.order(:last_name)
   end
 
   # GET /classmates/1
@@ -19,6 +20,7 @@ class ClassmatesController < ApplicationController
 
   # GET /classmates/1/edit
   def edit
+    @statuses = Status.all
   end
 
   # POST /classmates
@@ -69,9 +71,9 @@ class ClassmatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def classmate_params
-      params.require(:classmate).permit(:first_name, :last_name, :married_name, :paid, :attending, :status, :user,
+      params.require(:classmate).permit(:first_name, :last_name, :married_name, :paid, :attending, :status_id, :user_id,
         addresses_attributes: [:id, :street1, :stree2, :city, :state, :zip, :country],
-        phones_attributes: [:id, :type, :number],
-        emails_attributes: [:id, :type, :email])
+        phones_attributes: [:id, :label, :number],
+        emails_attributes: [:id, :label, :email])
     end
 end

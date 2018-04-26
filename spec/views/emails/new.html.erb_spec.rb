@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "emails/new", type: :view do
   before(:each) do
     assign(:email, Email.new(
-      :type => "",
+      :label => "",
       :email => "MyString",
       :classmate => ""
     ))

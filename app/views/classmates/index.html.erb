@@ -1,4 +1,36 @@
 <%- model_class = Classmate -%>
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
+      <%= link_to 'Logan High Class of 1973', root_path, :class => 'navbar-brand' %>
+    </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <%= search_form_for @q do |f| %>
+          <%= f.label 'name' %>
+          <%= f.search_field :first_name_or_last_name_or_married_name_cont %>
+          <%= f.submit %>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li><%= link_to('My Account', edit_user_registration_path) %></li>
+          <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+        <% else %>
+          <li><%= link_to('Sign in', new_user_session_path) %></li>
+          <li><%= link_to('Sign up', new_user_registration_path) %></li>
+        <% end %>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container-fluid -->
+</nav>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
@@ -23,13 +55,13 @@
         <td><%= classmate.spouse %></td>
         <td><%= classmate.paid %></td>
         <td><%= classmate.attending %></td>
-        <td><%= classmate.status_id %></td>
+        <td><%= classmate.status_id.present? ? Status.find_by_id(classmate.status_id).name : nil %></td>
         <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
+          <%# link_to t('.show', :default => t("helpers.links.show")),
                       classmate_path(classmate), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_classmate_path(classmate), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <%# link_to t('.destroy', :default => t("helpers.links.destroy")),
                       classmate_path(classmate),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },

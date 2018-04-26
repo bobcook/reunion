@@ -4,12 +4,12 @@ RSpec.describe "phones/index", type: :view do
   before(:each) do
     assign(:phones, [
       Phone.create!(
-        :type => "Type",
+        :label => "Type",
         :number => "Number",
         :classmate => ""
       ),
       Phone.create!(
-        :type => "Type",
+        :label => "Type",
         :number => "Number",
         :classmate => ""
       )

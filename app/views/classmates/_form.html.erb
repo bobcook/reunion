@@ -1,4 +1,9 @@
-<%= form_for(setup_classmate(@classmate), :html => { :class => "form-horizontal classmate" }) do |f| %>
+<%= simple_form_for(setup_classmate(@classmate), wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean}) do |f| %>
   <% if @classmate.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
@@ -13,137 +18,106 @@
       </div>
     </div>
   <% end %>
-  Name:
   <div class="row">
-    <div class="col-6">
-    <div class="form-group">
-      <%= f.label :first_name, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-3">
-        <%= f.text_field :first_name, :class => 'form-control' %>
-      </div>
-      <%=f.error_span(:first_name) %>
+    <div class="col-lg-4">
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :married_name %>
+      <%= f.input :spouse %>
     </div>
-    <div class="form-group">
-      <%= f.label :last_name, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-3">
-        <%= f.text_field :last_name, :class => 'form-control' %>
-      </div>
-      <%=f.error_span(:last_name) %>
-    </div>
-  </div>
-    <div class="form-group">
-      <%= f.label :married_name, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-3">
-        <%= f.text_field :married_name, :class => 'form-control' %>
-      </div>
-      <%=f.error_span(:married_name) %>
-    </div>
-    <div class="form-group">
-      <%= f.label :spouse, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-3">
-        <%= f.text_field :spouse, :class => 'form-control' %>
-      </div>
-      <%=f.error_span(:spouse) %>
+    <div class="col-lg-4">
+      <div id="paypal-button"></div>
+      <%= f.input :paid, as: :boolean, boolean_style: :inline %>
+      <%= f.input :attending, as: :boolean, boolean_style: :inline %>
+      <%= f.input :status_id,:collection => @statuses, :include_blank => true %>
     </div>
   </div>
   <div class="row">
-    <div class="col-6">
-      <div class="form-group">
-        <%= f.label :paid, :class => 'control-label col-lg-2' %>
-        <div class="col-lg-6">
-          <%= f.check_box_tag :paid, :class => 'form-control' %>
-        </div>
-        <%=f.error_span(:paid) %>
+    <br><br>
+    <%= f.fields_for :addresses, wrapper: :horizontal_form,
+    wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean} do |ff| %>
+      <div class="col-lg-4">
+        <%= ff.input :street1 %>
+        <%= ff.input :stree2 %>
+        <%= ff.input :city %>
+        <%= ff.input :state %>
+        <%= ff.input :zip %>
+        <%= ff.input :country %>
+        <br>
       </div>
-      <div class="form-group">
-        <%= f.label :attending, :class => 'control-label col-lg-2' %>
-        <div class="col-lg-7">
-          <%= f.check_box_tag :attending, :class => 'form-control' %>
-        </div>
-        <%=f.error_span(:attending) %>
+    <% end %>
+  </div>
+  <div class="row">
+    <br><br>
+    <%= f.fields_for :phones, wrapper: :horizontal_form,
+    wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean} do |fp| %>
+      <div class="col-lg-4">
+        <%= fp.input :label %>
+        <%= fp.input :number %>
       </div>
-      <div class="form-group">
-        <%= f.label :status_id, :class => 'control-label col-lg-2' %>
-        <div class="col-lg-7">
-          <%= f.select(:status_id, [1,2,3,4], {}, :class => "col-md-1") %>
-        </div>
-        <%=f.error_span(:status_id) %>
+    <% end %>
+  </div>
+  <div class="row">
+    <br><br>
+    <%= f.fields_for :emails, wrapper: :horizontal_form,
+    wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean} do |fe| %>
+      <div class="col-lg-4">
+        <%= fe.input :label %>
+        <%= fe.input :email %>
       </div>
-    </div>
-  </div>
-  Address:
-  <%= f.fields_for :addresses do |ff| %>
-  <div class="span6 form-group">
-    <%= ff.label :street1, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= ff.text_field :street1, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= ff.label :street2, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= ff.text_field :stree2, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= ff.label :city, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= ff.text_field :city, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= ff.label :state, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= ff.text_field :state, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= ff.label :zip, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= ff.text_field :zip, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= ff.label :country, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= ff.text_field :country, :class => 'form-control' %>
-    </div>
-  </div>
-  <% end %>
-  <%= f.fields_for :phones do |fp| %>
-  <div class="form-group">
-    <%= fp.label :type, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= fp.text_field :type, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= fp.label :phone_number, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= fp.text_field :number, :class => 'form-control' %>
-    </div>
-  </div>
-  <% end %>
-  <%= f.fields_for :emails do |fe| %>
-  <div class="form-group">
-    <%= fe.label :type, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= fe.text_field :type, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= fe.label :email, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= fe.text_field :email, :class => 'form-control' %>
-    </div>
-  </div>
-  <% end %>
-  <div class="form-group">
+    <% end %>
     <div class="col-lg-offset-2 col-lg-10">
+      <br><br>
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 classmates_path, :class => 'btn btn-default' %>
     </div>
-  </div>
+    <script>
+    paypal.Button.render({
+      env: 'production', // Or 'sandbox',
 
+      commit: true, // Show a 'Pay Now' button
+
+      style: {
+        color: 'gold',
+        size: 'small'
+      },
+
+      payment: function(data, actions) {
+        /*
+         * Set up the payment here
+         */
+      },
+
+      onAuthorize: function(data, actions) {
+        /*
+         * Execute the payment here
+         */
+      },
+
+      onCancel: function(data, actions) {
+        /*
+         * Buyer cancelled the payment
+         */
+      },
+
+      onError: function(err) {
+        /*
+         * An error occurred during the transaction
+         */
+      }
+    }, '#paypal-button');
+  </script>
 <% end %>

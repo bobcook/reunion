@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "emails/show", type: :view do
   before(:each) do
     @email = assign(:email, Email.create!(
-      :type => "Type",
+      :label => "Type",
       :email => "Email",
       :classmate => ""
     ))
