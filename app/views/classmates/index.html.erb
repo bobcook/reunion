@@ -40,8 +40,9 @@
       <th><%= model_class.human_attribute_name(:last_name) %></th>
       <th><%= model_class.human_attribute_name(:married_name) %></th>
       <th><%= model_class.human_attribute_name(:spouse) %></th>
-      <th><%= model_class.human_attribute_name(:paid) %></th>
-      <th><%= model_class.human_attribute_name(:attending) %></th>
+      <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:phone) %></th>
+      <th><%= model_class.human_attribute_name(:updated) %></th>
       <th><%= model_class.human_attribute_name(:status_id) %></th>
     </tr>
   </thead>
@@ -52,8 +53,9 @@
         <td><%= classmate.last_name %></td>
         <td><%= classmate.married_name %></td>
         <td><%= classmate.spouse %></td>
-        <td><%= classmate.paid %></td>
-        <td><%= classmate.attending %></td>
+        <td><%= classmate.emails.present? ? 'Yes' : nil %></td>
+        <td><%= classmate.phones.present? ? 'Yes' : nil %></td>
+        <td><%= classmate.updated_at > '2018-04-27 19:43:38 UTC' ? 'Yes' : nil %></td>
         <td><%= classmate.status_id.present? ? Status.find_by_id(classmate.status_id).name : nil %></td>
         <td>
           <%# link_to t('.show', :default => t("helpers.links.show")),
