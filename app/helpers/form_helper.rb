@@ -6,6 +6,7 @@ module FormHelper
     classmate.phones.build
     classmate.emails ||= Email.new
     classmate.emails.build
+    classmate.comment ||= Comment.new
     classmate
   end
 end

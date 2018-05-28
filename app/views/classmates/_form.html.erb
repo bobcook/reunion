@@ -78,12 +78,26 @@
         <%= fe.input :email %>
       </div>
     <% end %>
-    <div class="col-lg-offset-2 col-lg-10">
-      <br><br>
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                classmates_path, :class => 'btn btn-default' %>
-    </div>
+  </div>
+  <div class="row">
+    <br><br>
+    <%= f.fields_for :comment, wrapper: :horizontal_form,
+    wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean} do |fg| %>
+      <div class="col-lg-8">
+        <%= fg.input :comment, :as => :text, :input_html => { 'rows' => 6 } %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-offset-2 col-lg-10">
+    <br><br>
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+              classmates_path, :class => 'btn btn-default' %>
+  </div>
     <script>
     paypal.Button.render({
       env: 'production', // Or 'sandbox',

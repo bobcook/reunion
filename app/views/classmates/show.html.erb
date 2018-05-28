@@ -26,6 +26,8 @@
   <dd><%= @classmate.status_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
   <dd><%= @classmate.user_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:comment) %>:</strong></dt>
+  <dd><%= @classmate.comment.inspect %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

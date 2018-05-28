@@ -74,6 +74,7 @@ class ClassmatesController < ApplicationController
       params.require(:classmate).permit(:first_name, :last_name, :married_name, :paid, :attending, :status_id, :user_id,
         addresses_attributes: [:id, :street1, :stree2, :city, :state, :zip, :country],
         phones_attributes: [:id, :label, :number],
-        emails_attributes: [:id, :label, :email])
+        emails_attributes: [:id, :label, :email],
+        comment_attributes:[:id, :comment])
     end
 end
