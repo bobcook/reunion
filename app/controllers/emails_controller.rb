@@ -1,5 +1,6 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :edit, :update, :destroy]
+  after_save { |email| email.destroy if email.email.blank? }
 
   # GET /emails
   # GET /emails.json
